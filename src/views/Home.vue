@@ -1,12 +1,10 @@
 <template>
   <div class="home">
-    <p>Home</p>
     <div v-if="projects.length">
       <!-- cycle throughthe projects -->
       <div v-for="project in projects" :key="project.id">
         <!-- saving the value of the projects above to the prop :projects -->
         <SingleProject :project="project" @delete="handleDelete" @complete="handleComplete"/>
-        <div v-if="project.complete">Success!</div>
       </div>
     </div>
   </div>

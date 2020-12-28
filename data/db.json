@@ -4,13 +4,19 @@
       "id": 1,
       "title": "Create a new homepage banner",
       "details": "Lorem Ipsum",
-      "complete": false
+      "complete": true
     },
     {
       "id": 2,
       "title": "Make marketing email",
       "details": "Lorem Ipsum",
       "complete": false
+    },
+    {
+      "title": "Wrap up this project chapter",
+      "details": "A timer has been set for 45 min. Need to complete it within the allotted time.",
+      "complete": false,
+      "id": 3
     }
   ]
 }
