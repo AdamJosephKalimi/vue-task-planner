@@ -1,11 +1,12 @@
 <template>
-    <div class="project">
+    <!-- :class - if project.complete is true, apply class 'complete' -->
+    <div class="project" :class="{ complete: project.complete }">
         <div class="actions">
             <h3 @click="displayDetailsToggle">{{ project.title }}</h3>
             <div class="icons">
                 <span class="material-icons">edit</span>
                 <span  @click="deleteProject" class="material-icons">delete</span>
-                <span class="material-icons">done</span>
+                <span  @click="toggleComplete" class="material-icons check">done</span>
             </div>
         </div>
         <div class="details" v-if="displayDetails">
@@ -31,6 +32,15 @@ export default {
         deleteProject() {
             fetch(this.uri, { method: 'DELETE'})
             .then(() => this.$emit('delete', this.project.id))
+            .catch(err => console.log(err.message))
+        },
+        // Patch - the same as UPDATE
+        toggleComplete() {
+            fetch(this.uri, {
+                method: 'PATCH',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ complete: !this.project.complete})
+            }).then(() => this.$emit('complete', this.project.id))
             .catch(err => console.log(err.message))
         }
     }
@@ -64,5 +74,10 @@ h3 {
 .material-icons:hover {
     color: #777;
 }
-
+.project.complete {
+    border-left: 4px solid #00ce89;
+}
+.project.complete .check {
+    color: #00ce89;
+}
 </style>

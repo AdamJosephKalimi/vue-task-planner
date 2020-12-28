@@ -5,7 +5,8 @@
       <!-- cycle throughthe projects -->
       <div v-for="project in projects" :key="project.id">
         <!-- saving the value of the projects above to the prop :projects -->
-        <SingleProject :project="project" @delete="handleDelete"/>
+        <SingleProject :project="project" @delete="handleDelete" @complete="handleComplete"/>
+        <div v-if="project.complete">Success!</div>
       </div>
     </div>
   </div>
@@ -33,6 +34,13 @@ export default {
       this.projects = this.projects.filter((project) => {
         return project.id !== id
       })
+    },
+    handleComplete(id) {
+      for(let i = 0; i < this.projects.length; i++) {
+        if (this.projects[i].id === id) {
+          return this.projects[i].complete = !this.projects[i].complete
+        }
+      }
     }
   }
 }
