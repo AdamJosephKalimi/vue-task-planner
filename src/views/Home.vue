@@ -5,7 +5,7 @@
       <!-- cycle throughthe projects -->
       <div v-for="project in projects" :key="project.id">
         <!-- saving the value of the projects above to the prop :projects -->
-        <SingleProject :project="project"/>
+        <SingleProject :project="project" @delete="handleDelete"/>
       </div>
     </div>
   </div>
@@ -27,6 +27,13 @@ export default {
     .then(res => res.json())
     .then(data => this.projects = data)
     .catch(err => console.log(err.message))
+  },
+  methods: {
+    handleDelete(id) {
+      this.projects = this.projects.filter((project) => {
+        return project.id !== id
+      })
+    }
   }
 }
 </script>
