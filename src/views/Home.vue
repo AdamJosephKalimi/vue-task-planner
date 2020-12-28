@@ -1,8 +1,10 @@
 <template>
   <div class="home">
+    <!-- $event is the data being transmitted with the $emit event in FilterNav.vue -->
+    <FilterNav @filterChange=" filterShowing = $event" :filterShowing="filterShowing" />
     <div v-if="projects.length">
       <!-- cycle throughthe projects -->
-      <div v-for="project in projects" :key="project.id">
+      <div v-for="project in filteredProjects" :key="project.id">
         <!-- saving the value of the projects above to the prop :projects -->
         <SingleProject :project="project" @delete="handleDelete" @complete="handleComplete"/>
       </div>
@@ -12,14 +14,28 @@
 
 <script>
 import SingleProject from '../components/SingleProject.vue'
+import FilterNav from '../components/FilterNav.vue'
+
 export default {
   name: 'Home',
   data() {
     return {
-      projects: [] 
+      projects: [],
+      filterShowing: 'all'
     }
   },
-  components: { SingleProject },
+  computed: {
+    filteredProjects() {
+      if (this.filterShowing === 'completed') {
+        return this.projects.filter(project => project.complete)
+      }
+      if (this.filterShowing === 'ongoing') {
+        return this.projects.filter(project => !project.complete)
+      }
+      return this.projects
+    }
+  },
+  components: { SingleProject, FilterNav },
   mounted() {
     fetch('http://localhost:3000/projects')
     //gets the response and parses the json

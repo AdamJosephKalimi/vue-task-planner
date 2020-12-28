@@ -23,6 +23,12 @@
       "details": "There seems to be an issue with redirecting after making the PATCH request. Looking into that with this.\n\nIf you can see this text, the app has successfully been updated.\n",
       "complete": false,
       "id": 4
+    },
+    {
+      "title": "Checking to see if filter is working.",
+      "details": "Is this being read?",
+      "complete": false,
+      "id": 5
     }
   ]
 }
