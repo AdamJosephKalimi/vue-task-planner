@@ -15,8 +15,14 @@
     {
       "title": "Wrap up this project chapter",
       "details": "A timer has been set for 45 min. Need to complete it within the allotted time.",
-      "complete": false,
+      "complete": true,
       "id": 3
+    },
+    {
+      "title": "Test the final app",
+      "details": "There seems to be an issue with redirecting after making the PATCH request. Looking into that with this.\n\nIf you can see this text, the app has successfully been updated.\n",
+      "complete": false,
+      "id": 4
     }
   ]
 }

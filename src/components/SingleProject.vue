@@ -4,7 +4,12 @@
         <div class="actions">
             <h3 @click="displayDetailsToggle">{{ project.title }}</h3>
             <div class="icons">
-                <span class="material-icons">edit</span>
+                <!-- two ways to do the same thing. Top is mine. -->
+                <router-link :to="{ path: '/projects/' + this.project.id }">
+                <!-- <router-link :to="{ name: 'EditProject', params: { id: project.id } }"> -->
+                    <span class="material-icons">edit</span>
+                </router-link>
+                
                 <span  @click="deleteProject" class="material-icons">delete</span>
                 <span  @click="toggleComplete" class="material-icons check">done</span>
             </div>
@@ -40,7 +45,8 @@ export default {
                 method: 'PATCH',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ complete: !this.project.complete})
-            }).then(() => this.$emit('complete', this.project.id))
+            })
+            .then(() => this.$emit('complete', this.project.id))
             .catch(err => console.log(err.message))
         }
     }
